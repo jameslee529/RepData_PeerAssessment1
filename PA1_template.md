@@ -1,7 +1,7 @@
 # Reproducible Research: Peer Assessment 1
 
 
-## Loading and preprocessing the data -- test
+## Loading and preprocessing the data
 1. Unzip the activity.zip
 2. Read the activity.csv to data frame - dat
 3. Process/Transform the data
@@ -16,13 +16,6 @@ dat[, "date"] <- factor(dat[, "date"])
 
 
 ## What is mean total number of steps taken per day?
-For this part of the assignment, I ignore the missing values in the dataset.
-
-```r
-newDat <- na.omit(dat)
-```
-
-
 **Step 1.** Make a histogram of the total number of steps taken each day  
 
 ```r
@@ -30,18 +23,19 @@ dailySteps <- tapply(dat[, "steps"], dat[, "date"], sum)
 hist(dailySteps)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
 **Step 2.** Calculate and report the mean and median total number of steps taken per day  
 
 ```r
 meanOfSteps <- mean(dailySteps, na.rm = T)
 medianOfSteps <- median(dailySteps, na.rm = T)
-paste("The mean is:", meanOfSteps, ", and the median is:", medianOfSteps)
+paste("The mean number of steps taken each day is:", meanOfSteps, ", and the median is:", 
+    medianOfSteps)
 ```
 
 ```
-## [1] "The mean is: 10766.1886792453 , and the median is: 10765"
+## [1] "The mean number of steps taken each day is: 10766.1886792453 , and the median is: 10765"
 ```
 
 
@@ -50,11 +44,11 @@ paste("The mean is:", meanOfSteps, ", and the median is:", medianOfSteps)
 **Step 1.** Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
 
 ```r
-averageStepsPer5m <- tapply(newDat[, "steps"], newDat[, "interval"], mean)
+averageStepsPer5m <- tapply(dat[, "steps"], dat[, "interval"], mean, na.rm = T)
 plot(averageStepsPer5m, type = "l", xlab = "5-minute interval", ylab = "average steps")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 
 **Step 2.** Retrieve the 5-minute interval which contains the maximum number of steps, on average across all the days in the dataset.
@@ -75,7 +69,7 @@ paste("The max number is:", maxAverageStepsPer5m)
 
 ```r
 rowsAll <- nrow(dat)
-rowsWithoutNA <- nrow(newDat)
+rowsWithoutNA <- nrow(na.omit(dat))
 paste("The total number of rows with NAs is ", rowsAll - rowsWithoutNA)
 ```
 
@@ -103,7 +97,7 @@ dailySteps <- tapply(datFilledInNAs[, "steps"], datFilledInNAs[, "date"], sum)
 hist(dailySteps)
 ```
 
-![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9.png) 
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
 
 Q: Do these values differ from the estimates from the first part of the assignment?   
 A: Yes.
@@ -150,5 +144,5 @@ steps$interval <- as.integer(steps$interval)
 xyplot(steps ~ interval | week, data = steps, layout = c(1, 2), type = "l")
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11.png) 
+![plot of chunk unnamed-chunk-10](figure/unnamed-chunk-10.png) 
 

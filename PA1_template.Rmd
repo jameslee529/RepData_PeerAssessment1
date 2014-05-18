@@ -1,7 +1,7 @@
 # Reproducible Research: Peer Assessment 1
 
 
-## Loading and preprocessing the data -- test
+## Loading and preprocessing the data
 1. Unzip the activity.zip
 2. Read the activity.csv to data frame - dat
 3. Process/Transform the data
@@ -14,11 +14,6 @@ dat[, "date"] <- factor(dat[, "date"])
 
 
 ## What is mean total number of steps taken per day?
-For this part of the assignment, I ignore the missing values in the dataset.
-```{r}
-newDat <- na.omit(dat)
-```
-
 **Step 1.** Make a histogram of the total number of steps taken each day  
 ```{r}
 dailySteps <- tapply(dat[, "steps"], dat[, "date"], sum)
@@ -28,14 +23,14 @@ hist(dailySteps)
 ```{r}
 meanOfSteps <- mean(dailySteps, na.rm = T)
 medianOfSteps <- median(dailySteps, na.rm = T)
-paste("The mean is:", meanOfSteps, ", and the median is:", medianOfSteps)
+paste("The mean number of steps taken each day is:", meanOfSteps, ", and the median is:", medianOfSteps)
 ```
 
 
 ## What is the average daily activity pattern?
 **Step 1.** Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
 ```{r}
-averageStepsPer5m <- tapply(newDat[, "steps"], newDat[, "interval"], mean)
+averageStepsPer5m <- tapply(dat[, "steps"], dat[, "interval"], mean, na.rm = T)
 plot(averageStepsPer5m, type = "l", xlab = "5-minute interval", ylab = "average steps")
 ```
 
@@ -50,7 +45,7 @@ paste("The max number is:", maxAverageStepsPer5m)
 **Step 1.** Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs) 
 ```{r}
 rowsAll <- nrow(dat)
-rowsWithoutNA <- nrow(newDat)
+rowsWithoutNA <- nrow(na.omit(dat))
 paste("The total number of rows with NAs is ", rowsAll - rowsWithoutNA)
 ```
 **Step 2.** Fill in all of the missing values with the mean for that 5-minute interval.  
