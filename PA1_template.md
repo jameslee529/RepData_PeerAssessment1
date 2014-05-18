@@ -99,14 +99,21 @@ hist(dailySteps)
 
 ![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8.png) 
 
-Q: Do these values differ from the estimates from the first part of the assignment?   
-A: Yes.
+```r
+meanOfSteps <- mean(dailySteps)
+medianOfSteps <- median(dailySteps)
+paste("The mean number of steps taken per day is:", meanOfSteps, ", and the median is:", 
+    medianOfSteps, ". The median value differs from the estimates from the first part of the assignment.")
+```
 
-Q: What is the impact of imputing missing data on the estimates of the total daily number of steps? 
-A: I think it increases mean value of the total daily number of steps.
+```
+## [1] "The mean number of steps taken per day is: 10766.1886792453 , and the median is: 10766.1886792453 . The median value differs from the estimates from the first part of the assignment."
+```
+
 
 ## Are there differences in activity patterns between weekdays and weekends?
-**Step 1.** Create a new factor variable in the dataset with two levels â€? â€œweekdayâ€? and â€œweekendâ€? indicating whether a given date is a weekday or weekend day.
+**Step 1.** Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend
+day.
 
 ```r
 Sys.setlocale("LC_TIME", "English")
