@@ -54,7 +54,7 @@ paste("I get the max number ", maxAverageStepsPer5m, " at ", maxNInterval, " int
 
 
 ## Imputing missing values
-1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs) 
+1. Calculate and report the total number of missing values in the dataset
 ```{r Report_rowswithoutNAS}
 rowsAll <- nrow(dat)
 rowsWithoutNA <- nrow(na.omit(dat))
