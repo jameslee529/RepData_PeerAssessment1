@@ -43,7 +43,7 @@ paste("The mean number of steps taken each day is:", meanOfSteps, ", and the med
 
 
 ## What is the average daily activity pattern?
-1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
+Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)  
 
 ```r
 averageStepsPer5m <- tapply(dat[, "steps"], dat[, "interval"], mean, na.rm = T)
@@ -53,7 +53,7 @@ plot(averageStepsPer5m, type = "l", xlab = "5-minute interval", ylab = "average 
 ![plot of chunk Making_timeseries_plot](figure/Making_timeseries_plot.png) 
 
 
-2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```r
 max5MinuteInterval <- names(which.max(averageStepsPer5m))
@@ -68,18 +68,18 @@ if (nchar(max5MinuteInterval) <= 2) {
         3, 4), sep = "")
 }
 maxAverageStepsPer5m <- max(averageStepsPer5m)
-paste("I get the max number ", maxAverageStepsPer5m, " at ", maxNInterval, " intervals (", 
+paste("The max number is ", maxAverageStepsPer5m, " at ", maxNInterval, " intervals (", 
     max5MinuteInterval, ")", sep = "")
 ```
 
 ```
-## [1] "I get the max number 206.169811320755 at 104 intervals (8:35)"
+## [1] "The max number is 206.169811320755 at 104 intervals (8:35)"
 ```
 
 
 
 ## Imputing missing values
-1. Calculate and report the total number of missing values in the dataset
+Calculate and report the total number of missing values in the dataset
 
 ```r
 rowsAll <- nrow(dat)
@@ -91,8 +91,8 @@ paste("The total number of rows with NAs is", rowsAll - rowsWithoutNA)
 ## [1] "The total number of rows with NAs is 2304"
 ```
 
-2. Fill in all of the missing values with the mean for that 5-minute interval.  
-3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+Fill in all of the missing values with the mean for that 5-minute interval.    
+Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
 ```r
 datFilledInNAs <- dat
@@ -104,7 +104,7 @@ for (i in 1:nrow(dat)) {
 ```
 
   
-4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
+Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day.   
 
 ```r
 dailySteps <- tapply(datFilledInNAs[, "steps"], datFilledInNAs[, "date"], sum)
@@ -126,8 +126,8 @@ paste("The mean number of steps taken per day is:", meanOfSteps, ", and the medi
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-1. Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend
-day.
+Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend
+day.  
 
 ```r
 Sys.setlocale("LC_TIME", "English")
@@ -146,7 +146,7 @@ datFilledInNAs$week <- factor(datFilledInNAs$week)
 ```
 
 
-2. Make a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+Make a panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).  
 
 ```r
 library(lattice)
